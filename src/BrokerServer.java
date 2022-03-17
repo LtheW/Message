@@ -9,11 +9,13 @@ public class BrokerServer implements Runnable {
 	public BrokerServer(Socket socket){
 		this.socket = socket;
 	}
+
+	@Override
 	public void run(){
-		try{
+		try(
 			BufferedReader in  = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			PrintWriter out = new PrintWriter(socket.getOutputStream());
-			
+			PrintWriter out = new PrintWriter(socket.getOutputStream());)
+		{
 			while(true){
 				String str = in.readLine();
 				if(str ==null){
